@@ -2,7 +2,7 @@
  *
  * @file interrupts.cpp
  * @author Sasisekhar Govind
- *
+ * @author Raghav Ramaswamy
  */
 
 #include<interrupts.hpp>
