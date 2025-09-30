@@ -5,7 +5,7 @@
  * @author Raghav Ramaswamy
  */
 
-#include<interrupts.hpp>
+#include "interrupts.hpp"
 
 int main(int argc, char** argv) {
 
@@ -20,8 +20,8 @@ int main(int argc, char** argv) {
 
     /******************ADD YOUR VARIABLES HERE*************************/
 
-
-
+    int current_time = 0;
+    int context_save_time = 10;
     /******************************************************************/
 
     //parse each line of the input trace file
@@ -30,8 +30,25 @@ int main(int argc, char** argv) {
 
         /******************ADD YOUR SIMULATION CODE HERE*************************/
 
+        if(activity == "CPU"){
+            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + ", " + "CPU burst\n";
+            current_time += duration_intr;
+        }
 
+        else if (activity == "END_IO"){
+            execution += std::to_string(current_time) + ", " + std::to_string(7) + ", " + "end of I/O " + std::to_string(duration_intr) + ": " + "interrupt\n";
+            current_time += 7;
+        }
 
+        else if(activity == "SYSCALL"){
+            auto [execution2, second_time] = intr_boilerplate(current_time, duration_intr, context_save_time, vectors);
+            execution += execution2;
+            current_time = second_time;
+            execution += std::to_string(current_time) + ", " + std::to_string(delays[duration_intr]) + ", call device driver\n";
+            current_time += delays[duration_intr];
+            execution += std::to_string(current_time) + ", " + std::to_string(1) + ", IRET\n";
+            current_time++;
+        }
         /************************************************************************/
 
     }
