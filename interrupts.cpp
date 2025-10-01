@@ -3,6 +3,7 @@
  * @file interrupts.cpp
  * @author Sasisekhar Govind
  * @author Raghav Ramaswamy
+ * @author Hari Thennarasu
  */
 
 #include "interrupts.hpp"
@@ -19,7 +20,7 @@ int main(int argc, char** argv) {
     std::string execution;  //!< string to accumulate the execution output
 
     /******************ADD YOUR VARIABLES HERE*************************/
-
+    srand(time(0));
     int current_time = 0;
     int context_save_time = 10;
     /******************************************************************/
@@ -36,8 +37,9 @@ int main(int argc, char** argv) {
         }
 
         else if (activity == "END_IO"){
-            execution += std::to_string(current_time) + ", " + std::to_string(7) + ", " + "end of I/O " + std::to_string(duration_intr) + ": " + "interrupt\n";
-            current_time += 7;
+            int randomNum = rand() % 200;
+            execution += std::to_string(current_time) + ", " + std::to_string(randomNum) + ", " + "end of I/O " + std::to_string(duration_intr) + ": " + "interrupt\n";
+            current_time += randomNum;
         }
 
         else if(activity == "SYSCALL"){

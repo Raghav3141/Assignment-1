@@ -9,7 +9,7 @@
 #include<utility>
 #include<sstream>
 #include<iomanip>
-
+#include <ctime>
 #include<stdio.h>
 
 #define ADDR_BASE   0
