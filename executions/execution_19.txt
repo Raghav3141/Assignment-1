@@ -1,0 +1,70 @@
+0, 67, CPU burst
+67, 1, switch to kernel mode
+68, 10, context saved
+78, 1, find vector 6 in memory position 0x000C
+79, 1, load address 0X0639 into the PC
+80, 40, call device driver
+120, 225, finish SYSCALL ISR
+345, 1, IRET
+346, 67, CPU burst
+413, 1, switch to kernel mode
+414, 10, context saved
+424, 1, find vector 6 in memory position 0x000C
+425, 1, load address 0X0639 into the PC
+426, 40, call device driver
+466, 40, run END_IO ISR
+506, 185, finish END_IO ISR
+691, 1, IRET
+692, 67, CPU burst
+759, 1, switch to kernel mode
+760, 10, context saved
+770, 1, find vector 7 in memory position 0x000E
+771, 1, load address 0X00BD into the PC
+772, 40, call device driver
+812, 112, finish SYSCALL ISR
+924, 1, IRET
+925, 67, CPU burst
+992, 1, switch to kernel mode
+993, 10, context saved
+1003, 1, find vector 7 in memory position 0x000E
+1004, 1, load address 0X00BD into the PC
+1005, 40, call device driver
+1045, 40, run END_IO ISR
+1085, 72, finish END_IO ISR
+1157, 1, IRET
+1158, 67, CPU burst
+1225, 21, CPU burst
+1246, 1, switch to kernel mode
+1247, 10, context saved
+1257, 1, find vector 2 in memory position 0x0004
+1258, 1, load address 0X0695 into the PC
+1259, 40, call device driver
+1299, 110, finish SYSCALL ISR
+1409, 1, IRET
+1410, 21, CPU burst
+1431, 1, switch to kernel mode
+1432, 10, context saved
+1442, 1, find vector 2 in memory position 0x0004
+1443, 1, load address 0X0695 into the PC
+1444, 40, call device driver
+1484, 40, run END_IO ISR
+1524, 70, finish END_IO ISR
+1594, 1, IRET
+1595, 21, CPU burst
+1616, 1, switch to kernel mode
+1617, 10, context saved
+1627, 1, find vector 1 in memory position 0x0002
+1628, 1, load address 0X029C into the PC
+1629, 40, call device driver
+1669, 60, finish SYSCALL ISR
+1729, 1, IRET
+1730, 21, CPU burst
+1751, 1, switch to kernel mode
+1752, 10, context saved
+1762, 1, find vector 1 in memory position 0x0002
+1763, 1, load address 0X029C into the PC
+1764, 40, call device driver
+1804, 40, run END_IO ISR
+1844, 20, finish END_IO ISR
+1864, 1, IRET
+1865, 400, CPU burst
