@@ -20,9 +20,9 @@ int main(int argc, char** argv) {
     std::string execution;  //!< string to accumulate the execution output
 
     /******************ADD YOUR VARIABLES HERE*************************/
-    srand(time(0));
     int current_time = 0;
     int context_save_time = 10;
+    int isr_activity = 40;
     /******************************************************************/
 
     //parse each line of the input trace file
@@ -37,17 +37,44 @@ int main(int argc, char** argv) {
         }
 
         else if (activity == "END_IO"){
-            int randomNum = rand() % 200;
-            execution += std::to_string(current_time) + ", " + std::to_string(randomNum) + ", " + "end of I/O " + std::to_string(duration_intr) + ": " + "interrupt\n";
-            current_time += randomNum;
-        }
-
-        else if(activity == "SYSCALL"){
+            int delay_time = delays[duration_intr];
+            
             auto [execution2, second_time] = intr_boilerplate(current_time, duration_intr, context_save_time, vectors);
             execution += execution2;
             current_time = second_time;
-            execution += std::to_string(current_time) + ", " + std::to_string(delays[duration_intr]) + ", call device driver\n";
-            current_time += delays[duration_intr];
+            
+            int minTime = std::min(delay_time, isr_activity); 
+
+            execution += std::to_string(current_time) + ", " + std::to_string(minTime) + ", call device driver\n";
+            current_time += minTime;
+            delay_time -= minTime;
+            
+            minTime = std::min(delay_time, isr_activity);
+            
+            execution += std::to_string(current_time) + ", " + std::to_string(minTime) + ", run END_IO ISR\n";
+            current_time += minTime;
+            delay_time -= minTime;
+            
+            execution += std::to_string(current_time) + ", " + std::to_string(delay_time) + ", finish END_IO ISR\n";
+            current_time += delay_time;
+        }
+
+        else if(activity == "SYSCALL"){
+            int delay_time = delays[duration_intr];
+
+            auto [execution2, second_time] = intr_boilerplate(current_time, duration_intr, context_save_time, vectors);
+            execution += execution2;
+            current_time = second_time;
+
+            int minTime = std::min(delay_time, isr_activity); 
+
+            execution += std::to_string(current_time) + ", " + std::to_string(minTime) + ", call device driver\n";
+            current_time += minTime;
+            delay_time -= minTime;
+
+            execution += std::to_string(current_time) + ", " + std::to_string(delay_time) + ", finish SYSCALL ISR\n";
+            current_time += delay_time;
+
             execution += std::to_string(current_time) + ", " + std::to_string(1) + ", IRET\n";
             current_time++;
         }
