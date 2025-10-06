@@ -57,6 +57,9 @@ int main(int argc, char** argv) {
             
             execution += std::to_string(current_time) + ", " + std::to_string(delay_time) + ", finish END_IO ISR\n";
             current_time += delay_time;
+
+            execution += std::to_string(current_time) + ", " + std::to_string(1) + ", IRET\n";
+            current_time++;
         }
 
         else if(activity == "SYSCALL"){
