@@ -43,13 +43,13 @@ int main(int argc, char** argv) {
             execution += execution2;
             current_time = second_time;
             
-            int minTime = std::min(delay_time, isr_activity); 
+            int minTime = (delay_time > isr_activity) ? isr_activity : delay_time;
 
             execution += std::to_string(current_time) + ", " + std::to_string(minTime) + ", call device driver\n";
             current_time += minTime;
             delay_time -= minTime;
             
-            minTime = std::min(delay_time, isr_activity);
+            minTime = (delay_time > isr_activity) ? isr_activity : delay_time;
             
             execution += std::to_string(current_time) + ", " + std::to_string(minTime) + ", run END_IO ISR\n";
             current_time += minTime;
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
             execution += execution2;
             current_time = second_time;
 
-            int minTime = std::min(delay_time, isr_activity); 
+            int minTime = (delay_time > isr_activity) ? isr_activity : delay_time;
 
             execution += std::to_string(current_time) + ", " + std::to_string(minTime) + ", call device driver\n";
             current_time += minTime;
